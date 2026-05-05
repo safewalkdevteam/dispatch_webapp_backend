@@ -21,7 +21,11 @@ public class TeamPingController {
 
     @PostMapping
     public ResponseEntity<TeamPingDto> createTeamPing(@RequestBody TeamPingDto teamPingDto) {
+        if (teamPingDto.getActive() == false && teamPingDto.getSos() == false) {
+            teamPingService.deleteTeamPing(teamPingDto);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         TeamPingDto savedTeamPing = teamPingService.createOrUpdateTeamPing(teamPingDto);
-        return new ResponseEntity<>(savedTeamPing, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedTeamPing, HttpStatus.OK);
     }
 }

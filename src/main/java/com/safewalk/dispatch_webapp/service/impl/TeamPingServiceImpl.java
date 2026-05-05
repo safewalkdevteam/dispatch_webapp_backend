@@ -21,17 +21,26 @@ public class TeamPingServiceImpl implements TeamPingService {
         if (teamPing == null) {
             throw new RuntimeException("Mapping unsuccessful");
         }
-        TeamPing existingTeamPing = teamPingRepository.findByTeam(teamPing.getTeam());
-        if (existingTeamPing != null) {
-            existingTeamPing.setLatitude(teamPing.getLatitude());
-            existingTeamPing.setLongitude(teamPing.getLongitude());
-            existingTeamPing.setLastPing(teamPing.getLastPing());
-            existingTeamPing.setActive(teamPing.getActive());
-            existingTeamPing.setSos(teamPing.getSos());
-            teamPing = existingTeamPing;
-        }
 
-        TeamPing savedTeamPing = teamPingRepository.save(teamPing);
+        TeamPing saveTeamPing = teamPingRepository.findByTeam(teamPing.getTeam()).orElse(new TeamPing());
+
+        saveTeamPing.setTeam(teamPing.getTeam());
+        saveTeamPing.setLatitude(teamPing.getLatitude());
+        saveTeamPing.setLongitude(teamPing.getLongitude());
+        saveTeamPing.setLastPing(teamPing.getLastPing());
+        saveTeamPing.setActive(teamPing.getActive());
+        saveTeamPing.setSos(teamPing.getSos());
+        
+        TeamPing savedTeamPing = teamPingRepository.save(saveTeamPing);
         return TeamPingMapper.mapToTeamPingDto(savedTeamPing);
+    }
+
+    @Override
+    public void deleteTeamPing(TeamPingDto teamPingDto) {
+        TeamPing teamPing = teamPingRepository.findByTeam(teamPingDto.getTeam()).orElseThrow(
+            () -> new RuntimeException("Team ping not found for team: " + teamPingDto.getTeam()));
+        if (teamPing != null) {
+            teamPingRepository.delete(teamPing);
+        }
     }
 }

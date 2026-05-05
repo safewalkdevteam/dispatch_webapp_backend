@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.safewalk.dispatch_webapp.dto.TeamPingDto;
 import com.safewalk.dispatch_webapp.entity.TeamPing;
+import com.safewalk.dispatch_webapp.exception.ResourceNotFoundException;
 import com.safewalk.dispatch_webapp.mapper.TeamPingMapper;
 import com.safewalk.dispatch_webapp.repository.TeamPingRepository;
 import com.safewalk.dispatch_webapp.service.TeamPingService;
@@ -22,7 +23,8 @@ public class TeamPingServiceImpl implements TeamPingService {
             throw new RuntimeException("Mapping unsuccessful");
         }
 
-        TeamPing saveTeamPing = teamPingRepository.findByTeam(teamPing.getTeam()).orElse(new TeamPing());
+        TeamPing saveTeamPing = teamPingRepository.findByTeam(teamPing.getTeam())
+            .orElse(new TeamPing());
 
         saveTeamPing.setTeam(teamPing.getTeam());
         saveTeamPing.setLatitude(teamPing.getLatitude());
@@ -37,8 +39,8 @@ public class TeamPingServiceImpl implements TeamPingService {
 
     @Override
     public void deleteTeamPing(TeamPingDto teamPingDto) {
-        TeamPing teamPing = teamPingRepository.findByTeam(teamPingDto.getTeam()).orElseThrow(
-            () -> new RuntimeException("Team ping not found for team: " + teamPingDto.getTeam()));
+        TeamPing teamPing = teamPingRepository.findByTeam(teamPingDto.getTeam())
+            .orElseThrow(() -> new ResourceNotFoundException("Team ping not found for team: " + teamPingDto.getTeam()));
         if (teamPing != null) {
             teamPingRepository.delete(teamPing);
         }

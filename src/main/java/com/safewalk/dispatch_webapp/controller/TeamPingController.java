@@ -10,6 +10,8 @@ import com.safewalk.dispatch_webapp.service.TeamPingService;
 
 import lombok.AllArgsConstructor;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -21,11 +23,13 @@ public class TeamPingController {
 
     @PostMapping
     public ResponseEntity<TeamPingDto> createTeamPing(@RequestBody TeamPingDto teamPingDto) {
-        if (teamPingDto.getActive() == false && teamPingDto.getSos() == false) {
-            teamPingService.deleteTeamPing(teamPingDto);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
         TeamPingDto savedTeamPing = teamPingService.createOrUpdateTeamPing(teamPingDto);
         return new ResponseEntity<>(savedTeamPing, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{team}")
+    public ResponseEntity<Void> deleteTeamPing(@PathVariable("team") String team) {
+        teamPingService.deleteTeamPing(team);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

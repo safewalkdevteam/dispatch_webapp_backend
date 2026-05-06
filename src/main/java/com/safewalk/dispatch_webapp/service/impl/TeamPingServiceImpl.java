@@ -30,7 +30,6 @@ public class TeamPingServiceImpl implements TeamPingService {
         saveTeamPing.setLatitude(teamPing.getLatitude());
         saveTeamPing.setLongitude(teamPing.getLongitude());
         saveTeamPing.setLastPing(teamPing.getLastPing());
-        saveTeamPing.setActive(teamPing.getActive());
         saveTeamPing.setSos(teamPing.getSos());
         
         TeamPing savedTeamPing = teamPingRepository.save(saveTeamPing);
@@ -38,9 +37,9 @@ public class TeamPingServiceImpl implements TeamPingService {
     }
 
     @Override
-    public void deleteTeamPing(TeamPingDto teamPingDto) {
-        TeamPing teamPing = teamPingRepository.findByTeam(teamPingDto.getTeam())
-            .orElseThrow(() -> new ResourceNotFoundException("Team ping not found for team: " + teamPingDto.getTeam()));
+    public void deleteTeamPing(String team) {
+        TeamPing teamPing = teamPingRepository.findByTeam(team)
+            .orElseThrow(() -> new ResourceNotFoundException("Team ping not found for team: " + team));
         if (teamPing != null) {
             teamPingRepository.delete(teamPing);
         }

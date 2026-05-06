@@ -32,7 +32,5 @@ public class TeamPing {
     @Column(name = "last_ping")
     private Long lastPing;
 
-    private Boolean active;
-
     private Boolean sos;
 }

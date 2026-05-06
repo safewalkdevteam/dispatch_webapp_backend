@@ -26,9 +26,6 @@ public class TeamPingDto {
     @JsonProperty("LastPing")
     private Long lastPing;
 
-    @JsonProperty("Active")
-    private Boolean active;
-
     @JsonProperty("SOS")
     private Boolean sos;
 }

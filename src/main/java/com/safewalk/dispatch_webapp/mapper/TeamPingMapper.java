@@ -11,7 +11,6 @@ public class TeamPingMapper {
             teamPing.getLatitude(),
             teamPing.getLongitude(),
             teamPing.getLastPing(),
-            teamPing.getActive(),
             teamPing.getSos()
         );
     }
@@ -23,7 +22,6 @@ public class TeamPingMapper {
             teamPingDto.getLatitude(),
             teamPingDto.getLongitude(),
             teamPingDto.getLastPing(),
-            teamPingDto.getActive(),
             teamPingDto.getSos()
         );
     }

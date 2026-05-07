@@ -8,12 +8,14 @@ import com.safewalk.dispatch_webapp.exception.ResourceNotFoundException;
 import com.safewalk.dispatch_webapp.mapper.TeamPingMapper;
 import com.safewalk.dispatch_webapp.repository.TeamPingRepository;
 import com.safewalk.dispatch_webapp.service.TeamPingService;
+import com.safewalk.dispatch_webapp.websocket.LocationWebSocketHandler;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class TeamPingServiceImpl implements TeamPingService {
+    private LocationWebSocketHandler locationWebSocketHandler;
     private TeamPingRepository teamPingRepository;
 
     @Override
@@ -33,6 +35,8 @@ public class TeamPingServiceImpl implements TeamPingService {
         saveTeamPing.setSos(teamPing.getSos());
         
         TeamPing savedTeamPing = teamPingRepository.save(saveTeamPing);
+
+        locationWebSocketHandler.broadcast(TeamPingMapper.mapToTeamPingDto(savedTeamPing));
         return TeamPingMapper.mapToTeamPingDto(savedTeamPing);
     }
 

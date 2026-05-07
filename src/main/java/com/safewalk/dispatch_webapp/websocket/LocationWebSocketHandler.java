@@ -59,8 +59,6 @@ public class LocationWebSocketHandler extends TextWebSocketHandler {
 
     public void broadcast(Object message) {
         System.out.println("BROADCASTING MESSAGE");
-        String json;
-
         sessions.forEach(session -> sendPing(message, session));
     }
 

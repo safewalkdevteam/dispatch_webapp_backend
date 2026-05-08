@@ -27,7 +27,7 @@ public class LocationWebSocketHandler extends TextWebSocketHandler {
 
     public void sendPing(Object message, WebSocketSession session) {
 
-        System.out.println("SENDING MESSAGE TO SESSION: " + session.getId() + " MESSAGE: " + ((TeamPingDto) message).getTeam());
+        System.out.println("SENDING MESSAGE TO SESSION: " + session.getId() + " MESSAGE: " + ((TeamPingDto) message).getTeamColour());
         String json;
         try {
             json = new ObjectMapper().writeValueAsString(message);

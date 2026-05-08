@@ -26,10 +26,4 @@ public class TeamPingController {
         TeamPingDto savedTeamPing = teamPingService.createOrUpdateTeamPing(teamPingDto);
         return new ResponseEntity<>(savedTeamPing, HttpStatus.OK);
     }
-
-    @DeleteMapping("{team}")
-    public ResponseEntity<Void> deleteTeamPing(@PathVariable("team") String team) {
-        teamPingService.deleteTeamPing(team);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

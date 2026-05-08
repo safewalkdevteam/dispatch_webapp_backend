@@ -25,10 +25,10 @@ public class TeamPingServiceImpl implements TeamPingService {
             throw new RuntimeException("Mapping unsuccessful");
         }
 
-        TeamPing saveTeamPing = teamPingRepository.findByTeam(teamPing.getTeam())
+        TeamPing saveTeamPing = teamPingRepository.findByTeamColour(teamPing.getTeamColour())
             .orElse(new TeamPing());
 
-        saveTeamPing.setTeam(teamPing.getTeam());
+        saveTeamPing.setTeamColour(teamPing.getTeamColour());
         saveTeamPing.setLatitude(teamPing.getLatitude());
         saveTeamPing.setLongitude(teamPing.getLongitude());
         saveTeamPing.setLastPing(teamPing.getLastPing());
@@ -38,14 +38,5 @@ public class TeamPingServiceImpl implements TeamPingService {
 
         locationWebSocketHandler.broadcast(TeamPingMapper.mapToTeamPingDto(savedTeamPing));
         return TeamPingMapper.mapToTeamPingDto(savedTeamPing);
-    }
-
-    @Override
-    public void deleteTeamPing(String team) {
-        TeamPing teamPing = teamPingRepository.findByTeam(team)
-            .orElseThrow(() -> new ResourceNotFoundException("Team ping not found for team: " + team));
-        if (teamPing != null) {
-            teamPingRepository.delete(teamPing);
-        }
     }
 }

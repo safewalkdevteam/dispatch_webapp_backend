@@ -1,13 +1,11 @@
 package com.safewalk.dispatch_webapp.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -22,8 +20,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name = "TeamPing")
-public class TeamPing {
+@Table(name = "Team")
+public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,15 +29,10 @@ public class TeamPing {
     @Column(unique = true)
     private String teamColour;
 
-    private Float latitude;
+    @Column(name = "is_active")
+    private boolean isActive;
 
-    private Float longitude;
-
-    @Column(name = "last_ping")
-    private Long lastPing;
-
-    private Boolean sos;
-
-    @OneToOne(mappedBy = "teamPing", cascade = CascadeType.ALL)
-    private Team team;
+    @OneToOne()
+    @JoinColumn(name = "team_ping_id")
+    private TeamPing teamPing;
 }

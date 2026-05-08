@@ -5,24 +5,24 @@ import com.safewalk.dispatch_webapp.entity.TeamPing;
 
 public class TeamPingMapper {
     public static TeamPingDto mapToTeamPingDto(TeamPing teamPing) {
-        return new TeamPingDto(
-            teamPing.getId(),
-            teamPing.getTeam(),
-            teamPing.getLatitude(),
-            teamPing.getLongitude(),
-            teamPing.getLastPing(),
-            teamPing.getSos()
-        );
+        return TeamPingDto.builder()
+            .id(teamPing.getId())
+            .teamColour(teamPing.getTeamColour())
+            .latitude(teamPing.getLatitude())
+            .longitude(teamPing.getLongitude())
+            .lastPing(teamPing.getLastPing())
+            .sos(teamPing.getSos())
+            .build();
     }
 
     public static TeamPing mapToTeamPing(TeamPingDto teamPingDto) {
-        return new TeamPing(
-            teamPingDto.getId(),
-            teamPingDto.getTeam(),
-            teamPingDto.getLatitude(),
-            teamPingDto.getLongitude(),
-            teamPingDto.getLastPing(),
-            teamPingDto.getSos()
-        );
+        return TeamPing.builder()
+            .id(teamPingDto.getId())
+            .teamColour(teamPingDto.getTeamColour())
+            .latitude(teamPingDto.getLatitude())
+            .longitude(teamPingDto.getLongitude())
+            .lastPing(teamPingDto.getLastPing())
+            .sos(teamPingDto.getSos())
+            .build();
     }
 }

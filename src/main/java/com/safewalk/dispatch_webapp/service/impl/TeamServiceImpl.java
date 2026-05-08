@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.safewalk.dispatch_webapp.dto.TeamDto;
 import com.safewalk.dispatch_webapp.entity.Team;
+import com.safewalk.dispatch_webapp.entity.TeamPing;
 import com.safewalk.dispatch_webapp.exception.ResourceNotFoundException;
 import com.safewalk.dispatch_webapp.mapper.TeamMapper;
+import com.safewalk.dispatch_webapp.repository.TeamPingRepository;
 import com.safewalk.dispatch_webapp.repository.TeamRepository;
 import com.safewalk.dispatch_webapp.service.TeamService;
 
@@ -18,6 +20,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TeamServiceImpl implements TeamService {
     private TeamRepository teamRepository;
+    private TeamPingRepository teamPingRepository;
 
     @Override
     public List<TeamDto> getTeams() {
@@ -32,6 +35,12 @@ public class TeamServiceImpl implements TeamService {
         Team team = teamRepository.findByTeamColour(teamColour)
             .orElseThrow(() -> new ResourceNotFoundException("Team not found with colour: " + teamColour));
         team.setActive(active);
+
+        if (!active) {
+            teamPingRepository.findByTeamColour(teamColour)
+                .ifPresent(teamPingRepository::delete);
+        }
+
         Team updatedTeam = teamRepository.save(team);
         return TeamMapper.mapToTeamDto(updatedTeam);
     }

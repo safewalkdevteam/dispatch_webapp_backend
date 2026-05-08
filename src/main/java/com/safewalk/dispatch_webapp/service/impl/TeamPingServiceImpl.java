@@ -35,7 +35,7 @@ public class TeamPingServiceImpl implements TeamPingService {
         if (!team.isActive()) {
             throw new ConflictException("Cannot ping for an inactive team: " + teamPing.getTeamColour());
         }
-        
+
         TeamPing saveTeamPing = teamPingRepository.findByTeamColour(teamPing.getTeamColour())
             .orElse(new TeamPing());
 

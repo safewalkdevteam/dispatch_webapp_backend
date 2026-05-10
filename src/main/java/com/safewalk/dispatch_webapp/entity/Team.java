@@ -1,5 +1,6 @@
 package com.safewalk.dispatch_webapp.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +33,6 @@ public class Team {
     @Column(name = "is_active")
     private boolean isActive;
 
-    @OneToOne()
-    @JoinColumn(name = "team_ping_id")
+    @OneToOne(mappedBy = "team", cascade = CascadeType.ALL)
     private TeamPing teamPing;
 }

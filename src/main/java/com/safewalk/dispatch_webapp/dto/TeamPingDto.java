@@ -14,7 +14,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamPingDto {
-    private Long id;
 
     @JsonProperty("Team")
     private String teamColour;

@@ -28,6 +28,12 @@ public class TeamController {
         return new ResponseEntity<>(teamService.getTeams(), HttpStatus.OK);
     }
 
+    @GetMapping("/{team}")
+    public ResponseEntity<TeamDto> getTeam(@PathVariable String team) {
+        return new ResponseEntity<>(teamService.getTeam(team), HttpStatus.OK);
+    }
+    
+
     @PatchMapping("/{team}/active")
     public ResponseEntity<TeamDto> setTeamActive(@PathVariable String team, @RequestParam boolean active) {
         return new ResponseEntity<>(teamService.setTeamActive(team, active), HttpStatus.OK);

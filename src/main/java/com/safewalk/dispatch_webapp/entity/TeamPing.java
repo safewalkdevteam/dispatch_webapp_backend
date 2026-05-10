@@ -40,6 +40,7 @@ public class TeamPing {
 
     private Boolean sos;
 
-    @OneToOne(mappedBy = "teamPing", cascade = CascadeType.ALL)
+    @OneToOne()
+    @JoinColumn(name = "team_ping_id")
     private Team team;
 }

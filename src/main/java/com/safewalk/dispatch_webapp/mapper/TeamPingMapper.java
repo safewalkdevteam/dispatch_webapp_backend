@@ -6,7 +6,6 @@ import com.safewalk.dispatch_webapp.entity.TeamPing;
 public class TeamPingMapper {
     public static TeamPingDto mapToTeamPingDto(TeamPing teamPing) {
         return TeamPingDto.builder()
-            .id(teamPing.getId())
             .teamColour(teamPing.getTeamColour())
             .latitude(teamPing.getLatitude())
             .longitude(teamPing.getLongitude())
@@ -17,7 +16,6 @@ public class TeamPingMapper {
 
     public static TeamPing mapToTeamPing(TeamPingDto teamPingDto) {
         return TeamPing.builder()
-            .id(teamPingDto.getId())
             .teamColour(teamPingDto.getTeamColour())
             .latitude(teamPingDto.getLatitude())
             .longitude(teamPingDto.getLongitude())

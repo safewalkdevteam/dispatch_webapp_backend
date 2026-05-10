@@ -12,9 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeamDto {
-
-    private Long id;
-
     private String teamColour;
     private boolean isActive;
 }

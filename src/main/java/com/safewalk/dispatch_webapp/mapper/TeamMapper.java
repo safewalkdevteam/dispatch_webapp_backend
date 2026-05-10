@@ -7,7 +7,6 @@ public class TeamMapper {
 
     public static TeamDto mapToTeamDto(Team team) {
         return TeamDto.builder()
-            .id(team.getId())
             .teamColour(team.getTeamColour())
             .isActive(team.isActive())
             .build();
@@ -15,7 +14,6 @@ public class TeamMapper {
 
     public static Team mapToTeam(TeamDto teamDto) {
         return Team.builder()
-            .id(teamDto.getId())
             .teamColour(teamDto.getTeamColour())
             .isActive(teamDto.isActive())
             .build();

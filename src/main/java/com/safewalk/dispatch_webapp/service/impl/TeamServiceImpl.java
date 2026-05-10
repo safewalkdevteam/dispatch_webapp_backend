@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.safewalk.dispatch_webapp.dto.TeamDto;
 import com.safewalk.dispatch_webapp.entity.Team;
@@ -23,6 +24,7 @@ public class TeamServiceImpl implements TeamService {
     private TeamPingRepository teamPingRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<TeamDto> getTeams() {
         return teamRepository.findAll()
             .stream()
@@ -31,6 +33,15 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public TeamDto getTeam(String teamColour) {
+        Team team = teamRepository.findByTeamColour(teamColour)
+            .orElseThrow(() -> new ResourceNotFoundException("Team not found with colour: " + teamColour));
+        return TeamMapper.mapToTeamDto(team);
+    }
+
+    @Override
+    @Transactional
     public TeamDto setTeamActive(String teamColour, boolean active) {
         Team team = teamRepository.findByTeamColour(teamColour)
             .orElseThrow(() -> new ResourceNotFoundException("Team not found with colour: " + teamColour));
@@ -38,7 +49,10 @@ public class TeamServiceImpl implements TeamService {
 
         if (!active) {
             teamPingRepository.findByTeamColour(teamColour)
-                .ifPresent(teamPingRepository::delete);
+                .ifPresent(teamPing -> {
+                    team.setTeamPing(null);
+                    teamPingRepository.delete(teamPing);
+                });
         }
 
         Team updatedTeam = teamRepository.save(team);

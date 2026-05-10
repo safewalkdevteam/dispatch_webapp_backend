@@ -13,6 +13,7 @@ import com.safewalk.dispatch_webapp.repository.TeamRepository;
 import com.safewalk.dispatch_webapp.service.TeamPingService;
 import com.safewalk.dispatch_webapp.websocket.LocationWebSocketHandler;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -23,6 +24,7 @@ public class TeamPingServiceImpl implements TeamPingService {
     private TeamRepository teamRepository;
 
     @Override
+    @Transactional
     public TeamPingDto createOrUpdateTeamPing(TeamPingDto teamPingDto) {
         TeamPing teamPing = TeamPingMapper.mapToTeamPing(teamPingDto);
         if (teamPing == null) {
@@ -44,6 +46,7 @@ public class TeamPingServiceImpl implements TeamPingService {
         saveTeamPing.setLongitude(teamPing.getLongitude());
         saveTeamPing.setLastPing(teamPing.getLastPing());
         saveTeamPing.setSos(teamPing.getSos());
+        saveTeamPing.setTeam(team);
         
         TeamPing savedTeamPing = teamPingRepository.save(saveTeamPing);
 

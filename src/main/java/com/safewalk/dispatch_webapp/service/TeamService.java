@@ -6,5 +6,6 @@ import com.safewalk.dispatch_webapp.dto.TeamDto;
 
 public interface TeamService {
     List<TeamDto> getTeams();
-    TeamDto setTeamActive(String team, boolean active);
+    TeamDto getTeam(String teamColour);
+    TeamDto setTeamActive(String teamColour, boolean active);
 }

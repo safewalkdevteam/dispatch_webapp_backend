@@ -12,6 +12,8 @@ import com.safewalk.dispatch_webapp.dto.TeamDto;
 import com.safewalk.dispatch_webapp.service.TeamService;
 
 import lombok.AllArgsConstructor;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/teams")
 public class TeamController {
     private TeamService teamService;

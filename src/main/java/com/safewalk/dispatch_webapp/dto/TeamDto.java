@@ -1,5 +1,7 @@
 package com.safewalk.dispatch_webapp.dto;
 
+import com.safewalk.dispatch_webapp.enums.TeamStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,5 +15,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TeamDto {
     private String teamColour;
-    private boolean isActive;
+    private TeamStatus status;
+    private Boolean sos;
 }

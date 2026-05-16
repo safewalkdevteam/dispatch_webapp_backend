@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safewalk.dispatch_webapp.dto.TeamDto;
+import com.safewalk.dispatch_webapp.enums.TeamStatus;
 import com.safewalk.dispatch_webapp.service.TeamService;
 
 import lombok.AllArgsConstructor;
@@ -37,8 +38,12 @@ public class TeamController {
     }
     
 
-    @PatchMapping("/{team}/active")
-    public ResponseEntity<TeamDto> setTeamActive(@PathVariable String team, @RequestParam boolean active) {
-        return new ResponseEntity<>(teamService.setTeamActive(team, active), HttpStatus.OK);
+    @PatchMapping("/{team}/status")
+    public ResponseEntity<TeamDto> setTeamStatus(
+        @PathVariable String team,
+        @RequestParam(required = false) TeamStatus status,
+        @RequestParam(required = false) Boolean sos
+    ) {
+        return new ResponseEntity<>(teamService.setTeamStatus(team, status, sos), HttpStatus.OK);
     }
 }

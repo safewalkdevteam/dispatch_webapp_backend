@@ -8,14 +8,14 @@ public class TeamMapper {
     public static TeamDto mapToTeamDto(Team team) {
         return TeamDto.builder()
             .teamColour(team.getTeamColour())
-            .isActive(team.isActive())
+            .status(team.getStatus())
             .build();
     }
 
     public static Team mapToTeam(TeamDto teamDto) {
         return Team.builder()
             .teamColour(teamDto.getTeamColour())
-            .isActive(teamDto.isActive())
+            .status(teamDto.getStatus())
             .build();
     }
 }

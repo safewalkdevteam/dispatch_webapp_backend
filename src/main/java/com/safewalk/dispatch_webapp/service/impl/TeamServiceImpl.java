@@ -1,8 +1,8 @@
 package com.safewalk.dispatch_webapp.service.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,7 +56,7 @@ public class TeamServiceImpl implements TeamService {
 
         if (team.getStatus() == TeamStatus.INACTIVE) {
             teamPingRepository.findByTeamColour(teamColour)
-                .ifPresent(teamPing -> {
+                .ifPresent((@NonNull TeamPing teamPing) -> {
                     team.setTeamPing(null);
                     teamPingRepository.delete(teamPing);
                 });

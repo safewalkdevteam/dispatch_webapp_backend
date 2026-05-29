@@ -43,16 +43,11 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     @Transactional
-    public TeamDto setTeamStatus(String teamColour, TeamStatus status, Boolean sos) {
+    public TeamDto setTeamStatus(String teamColour, TeamStatus status) {
         Team team = teamRepository.findByTeamColour(teamColour)
             .orElseThrow(() -> new ResourceNotFoundException("Team not found with colour: " + teamColour));
         
-        if (status != null) {
-            team.setStatus(status);
-        }
-        if (sos != null) {
-            team.setSos(sos);
-        }
+        team.setStatus(status);
 
         if (team.getStatus() == TeamStatus.OFF_DUTY) {
             teamPingRepository.findByTeamColour(teamColour)

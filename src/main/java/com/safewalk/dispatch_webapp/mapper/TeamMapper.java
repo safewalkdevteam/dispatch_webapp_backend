@@ -9,6 +9,7 @@ public class TeamMapper {
         return TeamDto.builder()
             .teamColour(team.getTeamColour())
             .status(team.getStatus())
+            .sos(team.getSos())
             .build();
     }
 
@@ -16,6 +17,7 @@ public class TeamMapper {
         return Team.builder()
             .teamColour(teamDto.getTeamColour())
             .status(teamDto.getStatus())
+            .sos(teamDto.getSos())
             .build();
     }
 }

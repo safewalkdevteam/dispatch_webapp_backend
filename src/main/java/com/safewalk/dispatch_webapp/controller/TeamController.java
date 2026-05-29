@@ -41,9 +41,8 @@ public class TeamController {
     @PatchMapping("/{team}/status")
     public ResponseEntity<TeamDto> setTeamStatus(
         @PathVariable String team,
-        @RequestParam(required = false) TeamStatus status,
-        @RequestParam(required = false) Boolean sos
+        @RequestParam(required = true) TeamStatus status
     ) {
-        return new ResponseEntity<>(teamService.setTeamStatus(team, status, sos), HttpStatus.OK);
+        return new ResponseEntity<>(teamService.setTeamStatus(team, status), HttpStatus.OK);
     }
 }

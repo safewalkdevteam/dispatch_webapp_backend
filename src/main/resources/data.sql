@@ -1,9 +1,9 @@
-INSERT IGNORE INTO team (is_active, sos, status, team_colour) VALUES (false, false, null, 'Magenta');
-INSERT IGNORE INTO team (is_active, sos, status, team_colour) VALUES (false, false, null, 'Ultraviolet');
-INSERT IGNORE INTO team (is_active, sos, status, team_colour) VALUES (false, false, null, 'Purple');
-INSERT IGNORE INTO team (is_active, sos, status, team_colour) VALUES (false, false, null, 'Blue');
-INSERT IGNORE INTO team (is_active, sos, status, team_colour) VALUES (false, false, null, 'Aqua');
-INSERT IGNORE INTO team (is_active, sos, status, team_colour) VALUES (false, false, null, 'Green');
-INSERT IGNORE INTO team (is_active, sos, status, team_colour) VALUES (false, false, null, 'Red');
-INSERT IGNORE INTO team (is_active, sos, status, team_colour) VALUES (false, false, null, 'Orange');
-INSERT IGNORE INTO team (is_active, sos, status, team_colour) VALUES (false, false, null, 'Yellow');
+INSERT IGNORE INTO team (sos, status, team_colour) VALUES (false, "OFF_DUTY", 'Magenta');
+INSERT IGNORE INTO team (sos, status, team_colour) VALUES (false, "OFF_DUTY", 'Ultraviolet');
+INSERT IGNORE INTO team (sos, status, team_colour) VALUES (false, "OFF_DUTY", 'Purple');
+INSERT IGNORE INTO team (sos, status, team_colour) VALUES (false, "OFF_DUTY", 'Blue');
+INSERT IGNORE INTO team (sos, status, team_colour) VALUES (false, "OFF_DUTY", 'Aqua');
+INSERT IGNORE INTO team (sos, status, team_colour) VALUES (false, "OFF_DUTY", 'Green');
+INSERT IGNORE INTO team (sos, status, team_colour) VALUES (false, "OFF_DUTY", 'Red');
+INSERT IGNORE INTO team (sos, status, team_colour) VALUES (false, "OFF_DUTY", 'Orange');
+INSERT IGNORE INTO team (sos, status, team_colour) VALUES (false, "OFF_DUTY", 'Yellow');

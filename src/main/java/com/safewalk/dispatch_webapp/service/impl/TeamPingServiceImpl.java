@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.safewalk.dispatch_webapp.dto.TeamPingDto;
 import com.safewalk.dispatch_webapp.entity.Team;
 import com.safewalk.dispatch_webapp.entity.TeamPing;
+import com.safewalk.dispatch_webapp.enums.TeamStatus;
 import com.safewalk.dispatch_webapp.exception.ConflictException;
 import com.safewalk.dispatch_webapp.exception.ResourceNotFoundException;
 import com.safewalk.dispatch_webapp.mapper.TeamPingMapper;
@@ -34,7 +35,7 @@ public class TeamPingServiceImpl implements TeamPingService {
         Team team = teamRepository.findByTeamColour(teamPing.getTeamColour())
             .orElseThrow(() -> new ResourceNotFoundException("Team not found with colour: " + teamPing.getTeamColour()));
         
-        if (!team.isActive()) {
+        if (team.getStatus() == TeamStatus.OFF_DUTY) {
             throw new ConflictException("Cannot ping for an inactive team: " + teamPing.getTeamColour());
         }
 

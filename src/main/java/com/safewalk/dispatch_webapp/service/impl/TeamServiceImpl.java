@@ -54,7 +54,7 @@ public class TeamServiceImpl implements TeamService {
             team.setSos(sos);
         }
 
-        if (team.getStatus() == TeamStatus.INACTIVE) {
+        if (team.getStatus() == TeamStatus.OFF_DUTY) {
             teamPingRepository.findByTeamColour(teamColour)
                 .ifPresent((@NonNull TeamPing teamPing) -> {
                     team.setTeamPing(null);

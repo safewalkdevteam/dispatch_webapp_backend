@@ -5,6 +5,8 @@ import com.safewalk.dispatch_webapp.enums.TeamStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,12 +33,10 @@ public class Team {
     @Column(unique = true)
     private String teamColour;
 
-    @Column(name = "is_active")
-    private boolean isActive;
-
     @OneToOne(mappedBy = "team", cascade = CascadeType.ALL)
     private TeamPing teamPing;
 
+    @Enumerated(EnumType.STRING)
     private TeamStatus status;
 
     private Boolean sos;
